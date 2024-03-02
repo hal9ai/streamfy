@@ -23,8 +23,6 @@ jobs:
         working-directory: streamfy
       - run: cat __init__.py
         working-directory: streamfy
-      - name: Build and publish to pypi
-        uses: JRubics/poetry-publish@v1.16
-        with:
-          pypi_token: ${{ secrets.PYPI_TOKEN }}
-          package_directory: "streamfy"
+      - run: python setup.py sdist bdist_wheel
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

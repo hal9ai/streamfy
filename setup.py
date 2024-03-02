@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="streamlit-component-vue",
+    name="streamfy",
     version="0.1.0",
     author="",
     author_email="",
