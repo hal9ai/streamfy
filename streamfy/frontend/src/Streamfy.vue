@@ -4,12 +4,12 @@
     <button @click="onClicked">Click Me!</button>
     <b-field label="Add some tags">
       <b-taginput
-        ref="tagel"
+        ref="tagRef"
         v-model="tags"
         :data="suggestions"
         autocomplete
         :allow-new="true"
-        :open-on-focus="focusOpen"
+        :open-on-focus="true"
         type="is-info"
         placeholder="Contains what?"
         aria-close-label="Remove"
@@ -25,8 +25,6 @@ import { ref, onMounted } from "vue"
 import { Streamlit } from "streamlit-component-lib"
 import { useStreamlit } from "./streamlit"
 
-const tagel = ref(null)
-
 export default {
   name: "Streamfy",
   props: ["args"], // Arguments that are passed to the plugin in Python are accessible in prop "args"
@@ -37,11 +35,15 @@ export default {
   },
   methods: {
     focused() {
-      this.focusOpen = true;
-      Streamlit.setFrameHeight(400);
+      if (this.tagRef) {
+        const menu = this.tagRef.$el.querySelector('.dropdown-menu');
+        menu.style.bottom = 'auto';
+      }
+
+      Streamlit.setFrameHeight(300);
     },
     blured() {
-      Streamlit.setFrameHeight();
+      Streamlit.setFrameHeight(100);
     }
   },
   setup() {
@@ -49,9 +51,11 @@ export default {
 
     const numClicks = ref(0)
     const onClicked = () => {
-      numClicks.value++
+      numClicks.value++;
       Streamlit.setComponentValue(numClicks.value)
     }
+
+    const tagRef = ref(null);
 
     const tags = [];
     const suggestions = ["Albertson", "Abogadro", "C", "D", "E", "F", "G"]
@@ -61,6 +65,7 @@ export default {
       numClicks,
       onClicked,
       suggestions,
+      tagRef,
     }
   },
 }
