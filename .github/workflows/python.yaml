@@ -4,10 +4,8 @@ name: Python
 
 on:
   push:
-    paths:
-      - python/**
-      - server/**
-      - .github/workflows/python.yaml
+    branches:
+      - main
 
 jobs:
   build:
