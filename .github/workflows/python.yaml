@@ -1,0 +1,32 @@
+name: Python
+
+# https://raw.githubusercontent.com/messense/crfs-rs/main/.github/workflows/Python.yml
+
+on:
+  push:
+    paths:
+      - python/**
+      - server/**
+      - .github/workflows/python.yaml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      - run: npm install
+        working-directory: streamfy/frontend
+      - run: npm run export
+        working-directory: streamfy/frontend
+      - run: sed -i 's/_RELEASE = False/_RELEASE = True/' __init__.py
+        working-directory: streamfy
+      - run: cat __init__.py
+        working-directory: streamfy
+      - name: Build and publish to pypi
+        uses: JRubics/poetry-publish@v1.16
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
+          package_directory: "streamfy"
