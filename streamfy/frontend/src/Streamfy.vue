@@ -16,9 +16,9 @@
       </b-taginput>
       <b-table
         v-else-if="args.component == 'table'"
-        :data="args.data"
-        :columns="args.columns"
-        :mobile-cards="args['has_mobile_cards'] != undefined ? args['has_mobile_cards'] : false">
+        v-bind="args"
+        :mobile-cards="args['has_mobile_cards'] != undefined ? args['has_mobile_cards'] : false"
+        >
       </b-table>
     </b-field>
   </span>

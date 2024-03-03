@@ -16,17 +16,30 @@ else:
     _component_func = components.declare_component(
         "streamfy", path=build_dir)
 
-def taginput(data=[], placeholder="", label="", key=None):
-    component_value = _component_func(component="taginput", label=label, data=data, placeholder=placeholder, key=key)
+def hyphen_case(string):
+    string = string.replace('_', '-')
+    return string
+
+def hyphen_case_keys(args):
+    snaked = {}
+    for key, value in args.items():
+        new_key = hyphen_case(key)
+        snaked[new_key] = value
+    return snaked
+
+def taginput(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="taginput", **hyphened)
     return component_value
 
-def table(data=[], columns=[], label="", key=None):
-    component_value = _component_func(component="table", label=label, data=data, columns=columns)
+def table(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="table", **hyphened)
     return component_value
 
 if not _RELEASE:
     st.subheader("Tags")
-    tags = taginput(data = ["A", "B", "C"], placeholder = "Choose letter")
+    tags = taginput(data=["A", "B", "C"], placeholder="Choose letter")
     st.write(tags)
     st.subheader("Table")
     columns = [
@@ -45,4 +58,4 @@ if not _RELEASE:
         { 'id': 1, 'name': 'Jesse' },
         { 'id': 2, 'first_name': 'John' },
     ]
-    table(data = data, columns = columns)
+    table(data=data, columns=columns, paginated=True)
