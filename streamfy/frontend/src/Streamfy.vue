@@ -5,8 +5,7 @@
         v-if="args.component == 'breadcrumb' && args.items != undefined"
       >
         <b-breadcrumb-item
-          v-for="item in args.items"
-          :key="item.text"
+          v-for="(item, i) in args.items" :key="i"
           v-bind="item"
           @click="click(item)"
         >{{item.text}}
@@ -15,9 +14,30 @@
       <b-button 
         v-else-if="args.component == 'button'"
         v-bind="args"
-        @click="click(args)">
+        @click="click(args)"
+      >
         {{ args.text}}
       </b-button>
+      <b-carousel
+        v-else-if="args.component == 'carousel'"
+        v-bind="args"
+      >
+        <b-carousel-item
+          v-for="(item, i) in args.items" :key="i"
+        >
+          <a class="image" @click="click(item)">
+            <img :src="item">
+          </a>
+        </b-carousel-item>
+        <template #list="props">
+          <b-carousel-list
+            v-model="props.active"
+            :data="args.items"
+            @switch="props.switch($event, false)"
+            as-indicator 
+          />
+        </template>
+      </b-carousel>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -45,6 +65,7 @@ export default {
   name: "Streamfy",
   props: ["args"],
   data() {
+    setTimeout(() => Streamlit.setFrameHeight(), 1000);
     return {
       result: [],
       jdata: undefined,

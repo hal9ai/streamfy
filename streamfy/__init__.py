@@ -37,6 +37,11 @@ def button(**kwargs):
     component_value = _component_func(component="button", **hyphened)
     return component_value
 
+def carousel(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="carousel", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -56,6 +61,14 @@ if not _RELEASE:
     if button(text = "Click!"):
         st.write("Clicked!")
 
+    st.subheader("Carousel")
+    selection = carousel(items=[
+        "https://picsum.photos/id/1051/1230/500",
+        "https://picsum.photos/id/1052/1230/500",
+        "https://picsum.photos/id/1053/1230/500",
+    ])
+    st.write(selection)
+    
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
     st.write(tags)
