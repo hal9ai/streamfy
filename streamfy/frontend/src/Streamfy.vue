@@ -1,24 +1,32 @@
 <template>
   <span>
-    <b-field ref="tagField" :label="label">
+    <b-field ref="field" :label="label">
+      <b-breadcrumb
+        v-if="args.component == 'breadcrumb' && args.items != undefined"
+      >
+        <b-breadcrumb-item
+          v-for="item in args.items"
+          :key="item.text"
+          v-bind="item"
+          tag="router-link"
+          to="#"
+          @click="click(item.text)"
+        >{{item.text}}
+        </b-breadcrumb-item>
+      </b-breadcrumb>
       <b-taginput
-        v-if="args.component == 'taginput'"
+        v-else-if="args.component == 'taginput'"
         v-model="tags"
-        :data="args.data"
-        autocomplete
-        :allow-new="true"
-        :open-on-focus="true"
-        type="is-info"
-        :placeholder="args.placeholder"
-        aria-close-label="Remove"
+        v-bind="args"
         @focus="focused"
-        @blur="blured">
+        @blur="blured"
+      >
       </b-taginput>
       <b-table
         v-else-if="args.component == 'table'"
         v-bind="args"
         :mobile-cards="args['has_mobile_cards'] != undefined ? args['has_mobile_cards'] : false"
-        >
+      >
       </b-table>
     </b-field>
   </span>
@@ -40,8 +48,8 @@ export default {
   },
   methods: {
     focused() {
-      if (this.tagField) {
-        const menu = this.tagField.$el.querySelector('.dropdown-menu');
+      if (this.field) {
+        const menu = this.field.$el.querySelector('.dropdown-menu');
         menu.style.bottom = 'auto';
       }
 
@@ -50,7 +58,10 @@ export default {
     },
     blured() {
       setTimeout(() => Streamlit.setFrameHeight(), 200);
-    }
+    },
+    click(value) {
+      Streamlit.setComponentValue(value)
+    },
   },
   watch: {
     tags() {
@@ -60,10 +71,10 @@ export default {
   setup() {
     useStreamlit()
 
-    const tagField = ref(null);
+    const field = ref(null);
 
     return {
-      tagField,
+      field,
     }
   },
 }
