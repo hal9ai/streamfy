@@ -34,11 +34,11 @@ else:
 # output value, and add a docstring for users.
 
 
-def streamfy(name, key=None):
+def taginput(name, key=None):
     component_value = _component_func(name=name, key=key, default=0)
     return component_value
 
 if not _RELEASE:
     st.subheader("Start")
-    streamfy("test", key="foo")
+    taginput("test", key="foo")
     st.subheader("End")
