@@ -1,7 +1,5 @@
 <template>
   <span>
-    Yodd! {{ args.name }}! &nbsp;
-    <button @click="onClicked">Click Me!</button>
     <b-field label="Add some tags">
       <b-taginput
         ref="tagRef"
@@ -43,17 +41,11 @@ export default {
       Streamlit.setFrameHeight(300);
     },
     blured() {
-      Streamlit.setFrameHeight(100);
+      setTimeout(() => Streamlit.setFrameHeight(80), 200);
     }
   },
   setup() {
     useStreamlit() // lifecycle hooks for automatic Streamlit resize
-
-    const numClicks = ref(0)
-    const onClicked = () => {
-      numClicks.value++;
-      Streamlit.setComponentValue(numClicks.value)
-    }
 
     const tagRef = ref(null);
 
@@ -62,8 +54,6 @@ export default {
 
     return {
       tags,
-      numClicks,
-      onClicked,
       suggestions,
       tagRef,
     }
