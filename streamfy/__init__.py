@@ -16,12 +16,33 @@ else:
     _component_func = components.declare_component(
         "streamfy", path=build_dir)
 
-def taginput(data=[], placeholder="", key=None):
-    component_value = _component_func(data=data, placeholder=placeholder, key=key)
+def taginput(data=[], placeholder="", label="", key=None):
+    component_value = _component_func(component="taginput", label=label, data=data, placeholder=placeholder, key=key)
+    return component_value
+
+def table(data=[], columns=[], label="", key=None):
+    component_value = _component_func(component="table", label=label, data=data, columns=columns)
     return component_value
 
 if not _RELEASE:
-    st.subheader("Start")
+    st.subheader("Tags")
     tags = taginput(data = ["A", "B", "C"], placeholder = "Choose letter")
     st.write(tags)
-    st.subheader("End")
+    st.subheader("Table")
+    columns = [
+        {
+            "field": 'id',
+            "label": 'ID',
+            "width": '40',
+            "numeric": True
+        },
+        {
+            "field": 'name',
+            "label": 'Name',
+        },
+    ]
+    data = [
+        { 'id': 1, 'name': 'Jesse' },
+        { 'id': 2, 'first_name': 'John' },
+    ]
+    table(data = data, columns = columns)

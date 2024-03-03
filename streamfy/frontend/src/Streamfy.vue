@@ -1,19 +1,24 @@
 <template>
   <span>
-    <b-field label="Add some tags">
+    <b-field ref="tagField" :label="label">
       <b-taginput
-        ref="tagRef"
+        v-if="args.component == 'taginput'"
         v-model="tags"
-        :data="data"
+        :data="args.data"
         autocomplete
         :allow-new="true"
         :open-on-focus="true"
         type="is-info"
-        placeholder="Contains what?"
+        :placeholder="args.placeholder"
         aria-close-label="Remove"
         @focus="focused"
         @blur="blured">
       </b-taginput>
+      <b-table
+        v-else-if="args.component == 'table'"
+        :data="args.data"
+        :columns="args.columns">
+      </b-table>
     </b-field>
   </span>
 </template>
@@ -29,36 +34,35 @@ export default {
   data() {
     return {
       tags: [],
-      focusOpen: false,
-      data: this.args.data ?? [],
-      placeholder: this.args.placeholder ?? '',
+      jdata: undefined,
     }
   },
   methods: {
     focused() {
-      if (this.tagRef) {
-        const menu = this.tagRef.$el.querySelector('.dropdown-menu');
+      if (this.tagField) {
+        const menu = this.tagField.$el.querySelector('.dropdown-menu');
         menu.style.bottom = 'auto';
       }
 
       Streamlit.setFrameHeight(300);
+      setTimeout(() => Streamlit.setFrameHeight(), 200);
     },
     blured() {
-      setTimeout(() => Streamlit.setFrameHeight(80), 200);
+      setTimeout(() => Streamlit.setFrameHeight(), 200);
     }
   },
   watch: {
     tags() {
       Streamlit.setComponentValue([...this.tags]);
-    }
+    },
   },
   setup() {
-    useStreamlit() // lifecycle hooks for automatic Streamlit resize
+    useStreamlit()
 
-    const tagRef = ref(null);
+    const tagField = ref(null);
 
     return {
-      tagRef,
+      tagField,
     }
   },
 }
