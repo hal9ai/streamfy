@@ -27,6 +27,16 @@ def hyphen_case_keys(args):
         snaked[new_key] = value
     return snaked
 
+def breadcrumb(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="breadcrumb", **hyphened)
+    return component_value
+
+def button(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="button", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -37,15 +47,14 @@ def table(**kwargs):
     component_value = _component_func(component="table", **hyphened)
     return component_value
 
-def breadcrumb(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
-    component_value = _component_func(component="breadcrumb", **hyphened)
-    return component_value
-
 if not _RELEASE:
     st.subheader("Breadcrumb")
     item = breadcrumb(items=[{"text": "A"}, {"text": "B"}])
     st.write(item)
+
+    st.subheader("Button")
+    if button(text = "Click!"):
+        st.write("Clicked!")
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")

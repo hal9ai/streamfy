@@ -8,15 +8,19 @@
           v-for="item in args.items"
           :key="item.text"
           v-bind="item"
-          tag="router-link"
-          to="#"
-          @click="click(item.text)"
+          @click="click(item)"
         >{{item.text}}
         </b-breadcrumb-item>
       </b-breadcrumb>
+      <b-button 
+        v-else-if="args.component == 'button'"
+        v-bind="args"
+        @click="click(args)">
+        {{ args.text}}
+      </b-button>
       <b-taginput
         v-else-if="args.component == 'taginput'"
-        v-model="tags"
+        v-model="result"
         v-bind="args"
         @focus="focused"
         @blur="blured"
@@ -42,7 +46,7 @@ export default {
   props: ["args"],
   data() {
     return {
-      tags: [],
+      result: [],
       jdata: undefined,
     }
   },
@@ -60,12 +64,17 @@ export default {
       setTimeout(() => Streamlit.setFrameHeight(), 200);
     },
     click(value) {
-      Streamlit.setComponentValue(value)
+      this.result = value
     },
   },
   watch: {
-    tags() {
-      Streamlit.setComponentValue([...this.tags]);
+    result() {
+      if (this.result?.length)
+        Streamlit.setComponentValue([...this.result]);
+      else if (typeof(this.result) == 'object')
+        Streamlit.setComponentValue(Object.assign({}, this.result));
+      else
+        Streamlit.setComponentValue(this.result);
     },
   },
   setup() {
