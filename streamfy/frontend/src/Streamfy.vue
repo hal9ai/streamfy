@@ -4,7 +4,7 @@
       <b-taginput
         ref="tagRef"
         v-model="tags"
-        :data="suggestions"
+        :data="data"
         autocomplete
         :allow-new="true"
         :open-on-focus="true"
@@ -25,10 +25,13 @@ import { useStreamlit } from "./streamlit"
 
 export default {
   name: "Streamfy",
-  props: ["args"], // Arguments that are passed to the plugin in Python are accessible in prop "args"
+  props: ["args"],
   data() {
     return {
+      tags: [],
       focusOpen: false,
+      data: this.args.data ?? [],
+      placeholder: this.args.placeholder ?? '',
     }
   },
   methods: {
@@ -44,17 +47,17 @@ export default {
       setTimeout(() => Streamlit.setFrameHeight(80), 200);
     }
   },
+  watch: {
+    tags() {
+      Streamlit.setComponentValue([...this.tags]);
+    }
+  },
   setup() {
     useStreamlit() // lifecycle hooks for automatic Streamlit resize
 
     const tagRef = ref(null);
 
-    const tags = [];
-    const suggestions = ["Albertson", "Abogadro", "C", "D", "E", "F", "G"]
-
     return {
-      tags,
-      suggestions,
       tagRef,
     }
   },
