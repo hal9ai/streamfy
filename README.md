@@ -33,19 +33,19 @@ streamlit run app.py
 
 ![](images/carousel.png)
 
-A file with all components is available in [examples/all.py](example/app.py):
+A file with all components is available in [examples/all.py](examples/app.py):
 
 ![](images/components.png)
 
-Take a look at [Buefy Documentation](https://buefy.org/documentation) for a list of all properties and examples available.
+Take a look at [Buefy's documentation](https://buefy.org/documentation) for a list of all properties and examples available.
 
 [![](images/buefy.png)](https://buefy.org/documentation)
 
 ## Contributing
 
-- Ensure you have [Python 3.6+](https://www.python.org/downloads/), [Node.js](https://nodejs.org), and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
-- Clone this repo.
-- Create a new Python virtual environment for the template:
+Ensure you have [Python 3.6+](https://www.python.org/downloads/), [Node.js](https://nodejs.org), and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
+
+Clone this repo and create a new Python virtual environment:
 
 ```
 $ python3 -m venv venv  # create venv
@@ -53,7 +53,7 @@ $ . venv/bin/activate   # activate venv
 $ pip install streamlit # install streamlit
 ```
 
-- Initialize and run the component template frontend:
+Initialize and run the component frontend:
 
 ```
 $ cd streamfy/frontend
@@ -61,18 +61,18 @@ $ npm install    # Install npm dependencies
 $ npm run serve  # Start the Webpack dev server
 ```
 
-- From a separate terminal, run the template's Streamlit app:
+From a separate terminal, run the Streamlit app:
 
 ```
 $ . venv/bin/activate  # activate the venv you created earlier
 $ streamlit run streamfy/__init__.py  # run the example
 ```
 
-- If all goes well, you should see something like this:
-  ![Quickstart Success](images/development.png)
-- Modify the frontend code at `streamfy/frontend/src/Streamfy.vue`.
-  - Parameters passed by Python script are made available in `args` props.
-- Modify the Python code at `streamfy/__init__.py`.
+If all goes well, you should see something like this:
+
+![](images/development.png)
+
+Modify the frontend code at `streamfy/frontend/src/Streamfy.vue` and the Python code at `streamfy/__init__.py`.
 
 ## Resources
 
