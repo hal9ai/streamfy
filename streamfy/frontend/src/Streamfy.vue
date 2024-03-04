@@ -95,6 +95,15 @@
         v-bind="args"
       >
       </b-numberinput>
+      <b-radio
+        v-else-if="args.component == 'radio'"
+        v-for="(radio, i) in args.radios" :key="i"
+        v-model="result"
+        :native-value="radio.text"
+        v-bind="radio"
+      >
+        {{radio.text}}
+      </b-radio>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"

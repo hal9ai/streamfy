@@ -77,6 +77,11 @@ def numberinput(**kwargs):
     component_value = _component_func(component="numberinput", **hyphened)
     return component_value
 
+def radio(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="radio", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -131,6 +136,10 @@ if not _RELEASE:
     st.subheader("Numberinput")
     number = numberinput(placeholder="10", min="5")
     st.write(number)
+
+    st.subheader("Radio")
+    radio = radio(radios=[{"text": "A"}, {"text": "B"}])
+    st.write(radio)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
