@@ -87,6 +87,11 @@ def rate(**kwargs):
     component_value = _component_func(component="rate", **hyphened)
     return component_value
 
+def select(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="select", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -149,6 +154,10 @@ if not _RELEASE:
     st.subheader("Rate")
     rate = rate()
     st.write(rate)
+
+    st.subheader("Select")
+    selected = select(data=[{"text": "Seattle"},{"text": "Portland"}])
+    st.write(selected)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")

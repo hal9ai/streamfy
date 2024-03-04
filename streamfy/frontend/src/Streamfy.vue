@@ -14,6 +14,7 @@
         >{{item.text}}
         </b-breadcrumb-item>
       </b-breadcrumb>
+
       <b-button 
         v-else-if="args.component == 'button'"
         v-bind="args"
@@ -21,6 +22,7 @@
       >
         {{ args.text}}
       </b-button>
+
       <b-carousel
         v-else-if="args.component == 'carousel'"
         v-bind="args"
@@ -41,6 +43,7 @@
           />
         </template>
       </b-carousel>
+
       <b-autocomplete
         v-else-if="args.component == 'autocomplete'"
         v-model="result"
@@ -49,6 +52,7 @@
         @blur="blured"
       >
       </b-autocomplete>
+
       <b-checkbox
         v-else-if="args.component == 'checkbox'"
         v-model="result"
@@ -56,6 +60,7 @@
       >
         {{ args.text}}
       </b-checkbox>
+
       <b-clockpicker
         v-else-if="args.component == 'clockpicker'"
         v-model="result"
@@ -65,6 +70,7 @@
         @blur="blured"
       >
       </b-clockpicker>
+
       <b-colorpicker
         v-else-if="args.component == 'colorpicker'"
         v-model="result"
@@ -74,6 +80,7 @@
         @blur="blured"
       >
       </b-colorpicker>
+
       <b-datepicker
         v-else-if="args.component == 'datepicker'"
         v-model="result"
@@ -83,18 +90,21 @@
         @blur="blured"
       >
       </b-datepicker>
+
       <b-input
         v-else-if="args.component == 'input'"
         v-model="result"
         v-bind="args"
       >
       </b-input>
+
       <b-numberinput
         v-else-if="args.component == 'numberinput'"
         v-model="result"
         v-bind="args"
       >
       </b-numberinput>
+
       <b-radio
         v-else-if="args.component == 'radio'"
         v-for="(radio, i) in args.radios" :key="i"
@@ -104,12 +114,28 @@
       >
         {{radio.text}}
       </b-radio>
+
       <b-rate
         v-else-if="args.component == 'rate'"
         v-model="result"
-        v-bind="radio"
+        v-bind="args"
       >
       </b-rate>
+
+      <b-select
+        v-else-if="args.component == 'select'"
+        v-model="result"
+        v-bind="args"
+      >
+        <option
+          v-for="(option, i) in args.data" :key="i"
+          :value="option.text"
+          v-bind="option"
+        >
+          {{ option.text }}
+        </option>
+      </b-select>
+
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -118,6 +144,7 @@
         @blur="blured"
       >
       </b-taginput>
+
       <b-table
         v-else-if="args.component == 'table'"
         v-bind="args"
@@ -146,7 +173,9 @@ export default {
     focused() {
       if (this.field) {
         const menu = this.field.$el.querySelector('.dropdown-menu');
-        menu.style.bottom = 'auto';
+        if (menu) {
+          menu.style.bottom = 'auto';
+        }
 
         const background = this.field.$el.querySelector('.background');
         if (background) {
