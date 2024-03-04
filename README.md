@@ -1,10 +1,35 @@
-# Streamlit Component template in Vue.js
+# Streamfy — Bulma for Streamlit
 
-Vue 3 template to build a Streamlit component. Uses Vue.js scoped slot to send parameters from Streamlit Python script into `args` props of your component.
+Modern frontend components based on [Bulma](https://bulma.io/) for [Streamlit](https://streamlit.io/) based of [Buefy](https://buefy.org/).
 
-## Setup
+## Starting
 
-[Copy paste](https://github.com/streamlit/component-template#quickstart) of the original component-template quickstart.
+Install `streamfy`:
+
+```bash
+pip install streamfy
+```
+
+Create a simple application `app.py`:
+
+```py
+import streamlit as st
+import streamfy as sy
+
+sy.carousel(items=[
+  "https://picsum.photos/id/1051/1230/500",
+  "https://picsum.photos/id/1052/1230/500",
+  "https://picsum.photos/id/1053/1230/500",
+])
+```
+
+Run this application:
+
+```
+streamlit run app.py
+```
+
+## Contributing
 
 - Ensure you have [Python 3.6+](https://www.python.org/downloads/), [Node.js](https://nodejs.org), and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed.
 - Clone this repo.
@@ -32,18 +57,11 @@ $ streamlit run streamfy/__init__.py  # run the example
 ```
 
 - If all goes well, you should see something like this:
-  ![Quickstart Success](quickstart.png)
+  ![Quickstart Success](images/development.png)
 - Modify the frontend code at `streamfy/frontend/src/Streamfy.vue`.
   - Parameters passed by Python script are made available in `args` props.
 - Modify the Python code at `streamfy/__init__.py`.
-- Feel free to rename the `streamfy` folder, `Streamfy.vue` file with its import in `App.vue`, and package name in `setup.py` and `package.json`.
 
 ## Resources
 
-- [Higher Order Components in Vue.js](https://medium.com/bethink-pl/higher-order-components-in-vue-js-a79951ac9176)
-- [Do we need Higher Order Components in Vue.js?](https://medium.com/bethink-pl/do-we-need-higher-order-components-in-vue-js-87c0aa608f48)
-- [Build better higher-order components with Vue 3](https://blog.logrocket.com/build-better-higher-order-components-with-vue-3/)
-- [Scoped slots](https://v3.vuejs.org/guide/component-slots.html#scoped-slots)
-- [Using Slots in Vue.js](https://www.smashingmagazine.com/2019/07/using-slots-vue-js/)
-- [Single File Components](https://v3.vuejs.org/guide/single-file-component.html)
-- [SFC Spec](https://vue-loader.vuejs.org/spec.html)
+- [Buefy Documentation](https://buefy.org/documentation/steps)
