@@ -154,8 +154,8 @@ def steps(**kwargs):
 def table(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     defaults_apply("table", hyphened)
-    if not "columns" in hyphened:
-        hyphened["columns"] = [{"field": key} for key in data[0].keys()]
+    if not "columns" in hyphened and "data" in kwargs and len(kwargs["data"]) > 0:
+        hyphened["columns"] = [{"field": key} for key in kwargs["data"][0].keys()]
     component_value = _component_func(component="table", **hyphened)
     return component_value
 
