@@ -2,7 +2,7 @@
   <span>
     <b-field
       ref="field" :label="label"
-      :style="{'padding': args.component == 'clockpicker' ? '0 0 20px 20px' : ''}"
+      :style="{'padding': ['clockpicker', 'colorpicker'].includes(args.component) ? '0 0 20px 20px' : ''}"
     >
       <b-breadcrumb
         v-if="args.component == 'breadcrumb' && args.items != undefined"
@@ -65,6 +65,16 @@
         @blur="blured"
       >
       </b-clockpicker>
+      <b-colorpicker
+        v-else-if="args.component == 'colorpicker'"
+        v-model="result"
+        v-bind="args"
+        inline
+        @focus="focused"
+        @mousedown="focused"
+        @blur="blured"
+      >
+      </b-colorpicker>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -95,19 +105,17 @@ export default {
     setTimeout(() => Streamlit.setFrameHeight(), 1000);
     return {
       result: undefined,
-      jdata: undefined,
     }
   },
   methods: {
     focused() {
-      console.log('...')
       if (this.field) {
         const menu = this.field.$el.querySelector('.dropdown-menu');
         menu.style.bottom = 'auto';
       }
 
       Streamlit.setFrameHeight(300);
-      setTimeout(() => Streamlit.setFrameHeight(), 200);
+      setTimeout(() => Streamlit.setFrameHeight(), 5000);
     },
     blured() {
       setTimeout(() => Streamlit.setFrameHeight(), 200);
@@ -118,21 +126,16 @@ export default {
   },
   watch: {
     result() {
-      console.log('.')
       if (this.result?.isArray && this.result.isArray()) {
-        console.log('.1')
         Streamlit.setComponentValue([...this.result]);
       }
       else if (this.result?.constructor?.toString()?.includes("Array")) {
-        console.log('.12')
         Streamlit.setComponentValue([...this.result]);
       }
       else if (this.result?.constructor == Object) {
-        console.log('.2')
         Streamlit.setComponentValue(Object.assign({}, this.result));
       }
       else {
-        console.log(this.result.constructor.toString())
         Streamlit.setComponentValue(this.result);
       }
     },
