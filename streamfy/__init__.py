@@ -244,10 +244,11 @@ if not _RELEASE:
     progress(value=80)
 
     st.subheader("Steps")
-    steps(steps=[
-        {"step": "1", "label": "First"},
-        {"step": "2", "label": "Second"}
-    ])
+    step = steps(steps=[
+        {"value": "1", "step": "1", "label": "First"},
+        {"value": "2", "step": "2", "label": "Second"}
+    ], default="0")
+    st.write(step)
 
     st.subheader("Table")
     columns = [

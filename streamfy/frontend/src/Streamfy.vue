@@ -196,7 +196,6 @@
           v-for="(step, i) in args.steps" :key="i"
           clickable
           v-bind="step"
-          @click="click(args)"
         >
           {{step.text}}
         </b-step-item>
