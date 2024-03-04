@@ -1,6 +1,6 @@
 # Streamfy — Bulma for Streamlit
 
-Modern frontend components based on [Bulma](https://bulma.io/) for [Streamlit](https://streamlit.io/) based of [Buefy](https://buefy.org/).
+Modern frontend components based on [Bulma](https://bulma.io/) and [Buefy](https://buefy.org/) for [Streamlit](https://streamlit.io/).
 
 ![](images/streamfy.gif)
 
@@ -30,6 +30,16 @@ Run this application:
 ```
 streamlit run app.py
 ```
+
+![](images/carousel.png)
+
+A file with all components is available in [examples/all.py](example/app.py):
+
+![](images/components.png)
+
+Take a look at [Buefy Documentation](https://buefy.org/documentation) for a list of all properties and examples available.
+
+[![](images/buefy.png)](https://buefy.org/documentation)
 
 ## Contributing
 
