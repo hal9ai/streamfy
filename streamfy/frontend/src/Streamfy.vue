@@ -176,6 +176,13 @@
         {{ args.text }}
       </b-notification>
 
+      <b-progress
+        v-else-if="args.component == 'progress'"
+        v-model="result"
+        v-bind="args"
+      >
+      </b-progress>
+
       <b-table
         v-else-if="args.component == 'table'"
         v-bind="args"

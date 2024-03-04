@@ -121,6 +121,11 @@ def notification(**kwargs):
     component_value = _component_func(component="notification", **hyphened)
     return component_value
 
+def progress(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="progress", **hyphened)
+    return component_value
+
 def table(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="table", **hyphened)
@@ -200,6 +205,9 @@ if not _RELEASE:
 
     st.subheader("Notification")
     notification(text="Important notification")
+
+    st.subheader("Progress")
+    progress(value=80)
 
     st.subheader("Table")
     columns = [
