@@ -38,6 +38,14 @@
           />
         </template>
       </b-carousel>
+      <b-autocomplete
+        v-else-if="args.component == 'autocomplete'"
+        v-model="result"
+        v-bind="args"
+        @focus="focused"
+        @blur="blured"
+      >
+      </b-autocomplete>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -90,7 +98,9 @@ export default {
   },
   watch: {
     result() {
-      if (this.result?.length)
+      if (typeof(this.result) == 'string')
+        Streamlit.setComponentValue(this.result);
+      else if (this.result?.length)
         Streamlit.setComponentValue([...this.result]);
       else if (typeof(this.result) == 'object')
         Streamlit.setComponentValue(Object.assign({}, this.result));
