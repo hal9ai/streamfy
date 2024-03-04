@@ -67,6 +67,11 @@ def datepicker(**kwargs):
     component_value = _component_func(component="datepicker", **hyphened)
     return component_value
 
+def input(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="input", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -113,6 +118,10 @@ if not _RELEASE:
     st.subheader("Datepicker")
     datepick = datepicker()
     st.write(datepick)
+
+    st.subheader("Input")
+    email = input(type="email", default="john@", maxlength="30")
+    st.write(email)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")

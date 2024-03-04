@@ -83,6 +83,12 @@
         @blur="blured"
       >
       </b-datepicker>
+      <b-input
+        v-else-if="args.component == 'input'"
+        v-model="result"
+        v-bind="args"
+      >
+      </b-input>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
