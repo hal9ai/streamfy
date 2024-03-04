@@ -104,6 +104,12 @@
       >
         {{radio.text}}
       </b-radio>
+      <b-rate
+        v-else-if="args.component == 'rate'"
+        v-model="result"
+        v-bind="radio"
+      >
+      </b-rate>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
