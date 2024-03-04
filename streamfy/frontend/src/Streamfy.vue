@@ -1,6 +1,9 @@
 <template>
   <span>
-    <b-field ref="field" :label="label">
+    <b-field
+      ref="field" :label="label"
+      :style="{'padding': args.component == 'clockpicker' ? '0 0 20px 20px' : ''}"
+    >
       <b-breadcrumb
         v-if="args.component == 'breadcrumb' && args.items != undefined"
       >
@@ -53,6 +56,15 @@
       >
         {{ args.text}}
       </b-checkbox>
+      <b-clockpicker
+        v-else-if="args.component == 'clockpicker'"
+        v-model="result"
+        v-bind="args"
+        inline
+        @focus="focused"
+        @blur="blured"
+      >
+      </b-clockpicker>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -88,6 +100,7 @@ export default {
   },
   methods: {
     focused() {
+      console.log('...')
       if (this.field) {
         const menu = this.field.$el.querySelector('.dropdown-menu');
         menu.style.bottom = 'auto';
@@ -105,14 +118,23 @@ export default {
   },
   watch: {
     result() {
-      if (typeof(this.result) == 'string')
-        Streamlit.setComponentValue(this.result);
-      else if (this.result?.length)
+      console.log('.')
+      if (this.result?.isArray && this.result.isArray()) {
+        console.log('.1')
         Streamlit.setComponentValue([...this.result]);
-      else if (typeof(this.result) == 'object')
+      }
+      else if (this.result?.constructor?.toString()?.includes("Array")) {
+        console.log('.12')
+        Streamlit.setComponentValue([...this.result]);
+      }
+      else if (this.result?.constructor == Object) {
+        console.log('.2')
         Streamlit.setComponentValue(Object.assign({}, this.result));
-      else
+      }
+      else {
+        console.log(this.result.constructor.toString())
         Streamlit.setComponentValue(this.result);
+      }
     },
   },
   setup() {
