@@ -1,0 +1,3 @@
+streamfy
+streamlit==1.15.2
+
