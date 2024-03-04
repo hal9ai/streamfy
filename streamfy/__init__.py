@@ -47,6 +47,11 @@ def autocomplete(**kwargs):
     component_value = _component_func(component="autocomplete", **hyphened)
     return component_value
 
+def checkbox(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="checkbox", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -77,6 +82,10 @@ if not _RELEASE:
     st.subheader("Autocomplete")
     complete = autocomplete(data=["Apple", "Bannana", "Cherry"])
     st.write(complete)
+
+    st.subheader("Checkbox")
+    checked = checkbox(text = "Check me")
+    st.write(checked)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")

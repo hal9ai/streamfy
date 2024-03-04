@@ -46,6 +46,13 @@
         @blur="blured"
       >
       </b-autocomplete>
+      <b-checkbox
+        v-else-if="args.component == 'checkbox'"
+        v-model="result"
+        v-bind="args"
+      >
+        {{ args.text}}
+      </b-checkbox>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -75,7 +82,7 @@ export default {
   data() {
     setTimeout(() => Streamlit.setFrameHeight(), 1000);
     return {
-      result: [],
+      result: undefined,
       jdata: undefined,
     }
   },
