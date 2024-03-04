@@ -1,7 +1,10 @@
 <template>
   <span>
     <b-field
-      ref="field" :label="label"
+      ref="field"
+      :label="args.label"
+      :type="args.type"
+      :message="args.message"
       :class="'sy-' + args.component"
     >
       <b-breadcrumb
