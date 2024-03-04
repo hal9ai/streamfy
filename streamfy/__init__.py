@@ -109,8 +109,16 @@ def taginput(**kwargs):
 
 def message(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
-    hyphened['default'] = True
+    if not "default" in hyphened:
+        hyphened['default'] = True
     component_value = _component_func(component="message", **hyphened)
+    return component_value
+
+def notification(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    if not "default" in hyphened:
+        hyphened['default'] = True
+    component_value = _component_func(component="notification", **hyphened)
     return component_value
 
 def table(**kwargs):
@@ -189,6 +197,9 @@ if not _RELEASE:
 
     st.subheader("Message")
     message(text="This is a message", title="Info", type="is-info")
+
+    st.subheader("Notification")
+    notification(text="Important notification")
 
     st.subheader("Table")
     columns = [

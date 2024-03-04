@@ -168,6 +168,14 @@
         {{ args.text }}
       </b-message>
 
+      <b-notification 
+        v-else-if="args.component == 'notification'"
+        v-model="result"
+        v-bind="args"
+      >
+        {{ args.text }}
+      </b-notification>
+
       <b-table
         v-else-if="args.component == 'table'"
         v-bind="args"
