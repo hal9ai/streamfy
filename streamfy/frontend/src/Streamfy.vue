@@ -89,6 +89,12 @@
         v-bind="args"
       >
       </b-input>
+      <b-numberinput
+        v-else-if="args.component == 'numberinput'"
+        v-model="result"
+        v-bind="args"
+      >
+      </b-numberinput>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
