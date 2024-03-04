@@ -2,7 +2,7 @@
   <span>
     <b-field
       ref="field" :label="label"
-      :style="{'padding': ['clockpicker', 'colorpicker', 'datepicker'].includes(args.component) ? '0 0 20px 20px' : ''}"
+      :class="'sy-' + args.component"
     >
       <b-breadcrumb
         v-if="args.component == 'breadcrumb' && args.items != undefined"
@@ -136,6 +136,13 @@
         </option>
       </b-select>
 
+      <b-slider
+        v-else-if="args.component == 'slider'"
+        v-model="result"
+        v-bind="args"
+      >
+      </b-slider>
+
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -229,5 +236,15 @@ export default {
 <style>
   .dropdown-menu.is-opened-top {
     bottom: none !important;
+  }
+
+  .sy-clockpicker,
+  .sy-colorpicker,
+  .sy-datepicker {
+    padding: 0 0 20px 20px;
+  }
+
+  .sy-slider {
+    padding: 30px 20px 10px 20px;
   }
 </style>

@@ -92,6 +92,11 @@ def select(**kwargs):
     component_value = _component_func(component="select", **hyphened)
     return component_value
 
+def slider(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="slider", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -158,6 +163,10 @@ if not _RELEASE:
     st.subheader("Select")
     selected = select(data=[{"text": "Seattle"},{"text": "Portland"}])
     st.write(selected)
+
+    st.subheader("Slider")
+    slide = slider()
+    st.write(slide)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
