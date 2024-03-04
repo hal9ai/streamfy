@@ -1,4 +1,4 @@
-# Streamfy — Bulma for Streamlit
+# Streamfy — Buefy for Streamlit
 
 Modern frontend components based on [Bulma](https://bulma.io/) and [Buefy](https://buefy.org/) for [Streamlit](https://streamlit.io/).
 
