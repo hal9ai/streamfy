@@ -1,6 +1,6 @@
 # Streamfy — Buefy for Streamlit
 
-Modern frontend components based on [Bulma](https://bulma.io/) and [Buefy](https://buefy.org/) for [Streamlit](https://streamlit.io/).
+Modern frontend web components based on [Bulma](https://bulma.io/) and [Buefy](https://buefy.org/) for [Streamlit](https://streamlit.io/).
 
 [![](images/streamfy.gif)](https://streamfy.streamlit.app/)
 
@@ -35,7 +35,7 @@ streamlit run app.py
 
 ![](images/carousel.png)
 
-A file with all components is available in [examples/all.py](examples/app.py):
+A file with all components is available in [examples/all.py](examples/all.py):
 
 ![](images/components.png)
 
