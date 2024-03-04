@@ -16,6 +16,24 @@ else:
     _component_func = components.declare_component(
         "streamfy", path=build_dir)
 
+defaults = {
+    "table": {
+        "per-page": 5,
+        "pagination-rounded": True,
+        "pagination-size": "is-small",
+        "sort-icon": "arrow-up",
+        "sort-icon-size": "is-small",
+        "default-sort-direction": "asc",
+        "paginated": True,
+    }
+}
+
+def defaults_apply(component, hyphened):
+    if not component in defaults:
+        return
+    for key, value in defaults[component].items():
+        hyphened.setdefault(key, value)
+
 def hyphen_case(string):
     string = string.replace('_', '-')
     return string
@@ -135,6 +153,9 @@ def steps(**kwargs):
 
 def table(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
+    defaults_apply("table", hyphened)
+    if not "columns" in hyphened:
+        hyphened["columns"] = [{"field": key} for key in data[0].keys()]
     component_value = _component_func(component="table", **hyphened)
     return component_value
 
@@ -251,20 +272,33 @@ if not _RELEASE:
     st.write(step)
 
     st.subheader("Table")
-    columns = [
-        {
-            "field": 'id',
-            "label": 'ID',
-            "width": '40',
-            "numeric": True
-        },
-        {
-            "field": 'name',
-            "label": 'Name',
-        },
-    ]
     data = [
-        { 'id': 1, 'name': 'Jesse' },
-        { 'id': 2, 'first_name': 'John' },
+        { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016/10/15 13:43:27', 'gender': 'Male' },
+        { 'id': 2, 'first_name': 'John', 'last_name': 'Jacobs', 'date': '2016/12/15 06:00:53', 'gender': 'Male' },
+        { 'id': 3, 'first_name': 'Tina', 'last_name': 'Gilbert', 'date': '2016/04/26 06:26:28', 'gender': 'Female' },
+        { 'id': 4, 'first_name': 'Clarence', 'last_name': 'Flores', 'date': '2016/04/10 10:28:46', 'gender': 'Male' },
+        { 'id': 5, 'first_name': 'Anne', 'last_name': 'Lee', 'date': '2016/12/06 14:38:38', 'gender': 'Female' }
     ]
-    table(data=data, columns=columns, paginated=True)
+
+    for i in range(0, 10):
+        data.append(data[i])
+
+    footer = [
+        {
+            "text": "Totals",
+        },
+        {
+            "text": "",
+        },
+        {
+            "text": "",
+        },
+        {
+            "text": "2000-2010",
+        },
+        {
+            "text": "Gender",
+        },
+    ]
+
+    table(data=data, footer=footer)

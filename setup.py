@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="streamfy",
-    version="0.2.7",
+    version="0.2.8",
     author="",
     author_email="",
     description="",

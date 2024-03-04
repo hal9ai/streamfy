@@ -199,15 +199,36 @@
           clickable
           v-bind="step"
         >
-          {{step.text}}
+          {{ step.text }}
         </b-step-item>
       </b-steps>
 
       <b-table
         v-else-if="args.component == 'table'"
-        v-bind="args"
+        v-bind="filterKeys(args, ['columns'])"
         :mobile-cards="args['has_mobile_cards'] != undefined ? args['has_mobile_cards'] : false"
       >
+        <b-table-column
+          v-for="(column, i) in args.columns" :key="i"
+          v-slot="props"
+          sortable
+          :label="column.field"
+          v-bind="column"
+        >
+          <span v-bind="column">
+          {{ props.row[column.field] }}
+          </span>
+        </b-table-column>
+        
+        <template #footer v-if="args.footer">
+          <th
+            v-for="(footer, i) in args.footer" :key="i"
+          >
+            <div class="th-wrap" v-bind="footer">
+              {{ footer.text }}
+            </div>
+          </th>
+        </template>
       </b-table>
     </b-field>
   </span>
@@ -276,6 +297,15 @@ export default {
             .toLowerCase()
             .indexOf(text.toLowerCase()) >= 0
         })
+    },
+    filterKeys(args, keysToExclude) {
+      const filteredDict = {};
+      Object.keys(args).forEach((key) => {
+        if (!keysToExclude.includes(key)) {
+          filteredDict[key] = args[key];
+        }
+      });
+      return filteredDict;
     },
   },
   watch: {
