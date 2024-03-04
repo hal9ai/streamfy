@@ -2,7 +2,7 @@
   <span>
     <b-field
       ref="field" :label="label"
-      :style="{'padding': ['clockpicker', 'colorpicker'].includes(args.component) ? '0 0 20px 20px' : ''}"
+      :style="{'padding': ['clockpicker', 'colorpicker', 'datepicker'].includes(args.component) ? '0 0 20px 20px' : ''}"
     >
       <b-breadcrumb
         v-if="args.component == 'breadcrumb' && args.items != undefined"
@@ -71,10 +71,18 @@
         v-bind="args"
         inline
         @focus="focused"
-        @mousedown="focused"
         @blur="blured"
       >
       </b-colorpicker>
+      <b-datepicker
+        v-else-if="args.component == 'datepicker'"
+        v-model="result"
+        v-bind="args"
+        inline
+        @focus="focused"
+        @blur="blured"
+      >
+      </b-datepicker>
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
@@ -112,10 +120,20 @@ export default {
       if (this.field) {
         const menu = this.field.$el.querySelector('.dropdown-menu');
         menu.style.bottom = 'auto';
+
+        const background = this.field.$el.querySelector('.background');
+        if (background) {
+          background.style.opacity = 0;
+        }
       }
 
-      Streamlit.setFrameHeight(300);
-      setTimeout(() => Streamlit.setFrameHeight(), 5000);
+      if (this.args.component == 'datepicker') {
+        Streamlit.setFrameHeight(440);
+      }
+      else {
+        Streamlit.setFrameHeight(300);
+        setTimeout(() => Streamlit.setFrameHeight(), 200);
+      }
     },
     blured() {
       setTimeout(() => Streamlit.setFrameHeight(), 200);

@@ -62,6 +62,11 @@ def colorpicker(**kwargs):
     component_value = _component_func(component="colorpicker", **hyphened)
     return component_value
 
+def datepicker(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="datepicker", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -104,6 +109,10 @@ if not _RELEASE:
     st.subheader("Colorpicker")
     color = colorpicker()
     st.write(color)
+
+    st.subheader("Datepicker")
+    datepick = datepicker()
+    st.write(datepick)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
