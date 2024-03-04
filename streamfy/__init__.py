@@ -126,6 +126,13 @@ def progress(**kwargs):
     component_value = _component_func(component="progress", **hyphened)
     return component_value
 
+def steps(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    if not "has-navigation" in hyphened:
+        hyphened['has-navigation'] = False
+    component_value = _component_func(component="steps", **hyphened)
+    return component_value
+
 def table(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="table", **hyphened)
@@ -208,6 +215,12 @@ if not _RELEASE:
 
     st.subheader("Progress")
     progress(value=80)
+
+    st.subheader("Steps")
+    steps(steps=[
+        {"step": "1", "label": "First"},
+        {"step": "2", "label": "Second"}
+    ])
 
     st.subheader("Table")
     columns = [

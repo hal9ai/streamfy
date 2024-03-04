@@ -183,6 +183,22 @@
       >
       </b-progress>
 
+      <b-steps
+        v-else-if="args.component == 'steps'"
+        :mobile-mode="false"
+        v-model="result"
+        v-bind="args"
+      >
+        <b-step-item
+          v-for="(step, i) in args.steps" :key="i"
+          clickable
+          v-bind="step"
+          @click="click(args)"
+        >
+          {{step.text}}
+        </b-step-item>
+      </b-steps>
+
       <b-table
         v-else-if="args.component == 'table'"
         v-bind="args"
