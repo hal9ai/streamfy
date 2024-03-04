@@ -160,6 +160,8 @@
         v-bind="args"
         @focus="focused"
         @blur="blured"
+        :data="filtered"
+        @typing="filteredData"
       >
       </b-taginput>
 
@@ -223,6 +225,7 @@ export default {
     setTimeout(() => Streamlit.setFrameHeight(), 1000);
     return {
       result: this.args.default,
+      filtered: undefined,
     }
   },
   methods: {
@@ -253,22 +256,48 @@ export default {
     click(value) {
       this.result = value
     },
+    filteredData(text) {
+      if (this.args.component != 'taginput') return;
+      if (!this.args.data) return;
+
+      console.log('x1')
+
+      const result = this.result;
+      console.log('x2')
+      this.filtered = this.args.data
+        .filter(e => {
+          console.log('x3 ' + e)
+          return !result.includes(e)
+        })
+        .filter((datum) => {
+          console.log('x4 ' + datum + ' ' + text)
+          return datum
+            .toString()
+            .toLowerCase()
+            .indexOf(text.toLowerCase()) >= 0
+        })
+    },
   },
   watch: {
-    result() {
-      if (this.result?.isArray && this.result.isArray()) {
-        Streamlit.setComponentValue([...this.result]);
-      }
-      else if (this.result?.constructor?.toString()?.includes("Array")) {
-        Streamlit.setComponentValue([...this.result]);
-      }
-      else if (this.result?.constructor == Object) {
-        Streamlit.setComponentValue(Object.assign({}, this.result));
-      }
-      else {
-        Streamlit.setComponentValue(this.result);
-      }
-    },
+    result: {
+      immediate: true,
+      handler: function() {
+        if (this.result?.isArray && this.result.isArray()) {
+          Streamlit.setComponentValue([...this.result]);
+        }
+        else if (this.result?.constructor?.toString()?.includes("Array")) {
+          Streamlit.setComponentValue([...this.result]);
+        }
+        else if (this.result?.constructor == Object) {
+          Streamlit.setComponentValue(Object.assign({}, this.result));
+        }
+        else {
+          Streamlit.setComponentValue(this.result);
+        }
+
+        this.filteredData('');
+      },
+    }
   },
   setup() {
     useStreamlit()
@@ -295,5 +324,9 @@ export default {
 
   .sy-slider {
     padding: 30px 20px 10px 20px;
+  }
+
+  .sy-taginput .dropdown-content {
+    margin-bottom: 20px;
   }
 </style>
