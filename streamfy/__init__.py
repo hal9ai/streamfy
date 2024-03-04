@@ -97,6 +97,11 @@ def slider(**kwargs):
     component_value = _component_func(component="slider", **hyphened)
     return component_value
 
+def switch(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    component_value = _component_func(component="switch", **hyphened)
+    return component_value
+
 def taginput(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="taginput", **hyphened)
@@ -167,6 +172,10 @@ if not _RELEASE:
     st.subheader("Slider")
     slide = slider()
     st.write(slide)
+
+    st.subheader("Switch")
+    switched = switch(text="Switch me!")
+    st.write(switched)
 
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")

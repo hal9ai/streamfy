@@ -143,6 +143,14 @@
       >
       </b-slider>
 
+      <b-switch
+        v-else-if="args.component == 'switch'"
+        v-model="result"
+        v-bind="args"
+      >
+        {{ args.text }}
+      </b-switch>
+
       <b-taginput
         v-else-if="args.component == 'taginput'"
         v-model="result"
