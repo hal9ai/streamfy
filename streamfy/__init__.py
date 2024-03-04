@@ -147,6 +147,20 @@ if not _RELEASE:
     if button(text = "Click!"):
         st.write("Clicked!")
 
+    button(text = "Primary Light", type="is-primary is-light")
+    button(text = "Success", type="is-success")
+    button(text = "Success Light", type="is-success is-light")
+    button(text = "Danger", type="is-danger")
+    button(text = "Danger Light", type="is-danger is-light")
+    button(text = "Warning", type="is-warning")
+    button(text = "Warning Light", type="is-warning is-light")
+    button(text = "Info", type="is-info")
+    button(text = "Info Light", type="is-info is-light") 
+    button(text = "Link", type="is-link")
+    button(text = "Link Light", type="is-link is-light") 
+    button(text = "Light", type="is-light")
+    button(text = "Ghost", type="is-ghost")
+
     st.subheader("Carousel")
     selection = carousel(items=[
         "https://picsum.photos/id/1051/1230/500",
@@ -163,6 +177,11 @@ if not _RELEASE:
     checked = checkbox(text = "Check me")
     st.write(checked)
 
+    checkbox(text="Info", type="is-info", default=True)
+    checkbox(text="Success", type="is-success", default=True)
+    checkbox(text="Danger", type="is-danger", default=True)
+    checkbox(text="Warning", type="is-warning", default=True)
+
     st.subheader("Clockpicker")
     clock = clockpicker()
     st.write(clock)
@@ -176,8 +195,16 @@ if not _RELEASE:
     st.write(datepick)
 
     st.subheader("Input")
-    email = input(type="email", icon="email", default="john@", maxlength="30")
-    st.write(email)
+    text = input()
+    st.write(text)
+    input(type="email", icon="email", default="john@", maxlength="30")
+    input(type="is-success", maxlength="30")
+    input(type="password", value="iwantmytreasure", password_reveal=True)
+    input(type="textarea", maxlength="200")
+    input(label="Success", type="is-success")
+    input(label="Error", type="is-danger")
+    input(label="Info", type="is-info")
+    input(label="Warning", type="is-warning")
 
     st.subheader("Numberinput")
     number = numberinput(placeholder="10", min="5")

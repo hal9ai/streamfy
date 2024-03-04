@@ -2,7 +2,9 @@
 
 Modern frontend components based on [Bulma](https://bulma.io/) and [Buefy](https://buefy.org/) for [Streamlit](https://streamlit.io/).
 
-![](images/streamfy.gif)
+[![](images/streamfy.gif)](https://streamfy.streamlit.app/)
+
+Live demo at [streamfy.streamlit.app](https://streamfy.streamlit.app/)
 
 ## Getting Started
 
