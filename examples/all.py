@@ -1,7 +1,9 @@
 import streamlit as st
 import streamfy as sy
 
+st.set_page_config(page_title="Streamfy — Buefy for Streamlit")
 st.title("Streamfy — Buefy for Streamlit")
+
 st.write("""
 This gallery showcases modern controls implemented in https://github.com/hal9ai/streamfy 
 """)

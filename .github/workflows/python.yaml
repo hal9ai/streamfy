@@ -17,6 +17,13 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v2
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@9bf09145c3560e451e8d8e87b42ccb3fef5b692d # v36.3.0
+        with:
+          since_last_remote_commit: true
+          files: |
+            setup.py
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
@@ -30,4 +37,5 @@ jobs:
         working-directory: streamfy
       - run: python setup.py sdist bdist_wheel
       - name: Publish package distributions to PyPI
+        if: steps.changed-files.outputs.any_changed == 'true'
         uses: pypa/gh-action-pypi-publish@release/v1
