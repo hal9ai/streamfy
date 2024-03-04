@@ -115,7 +115,7 @@ if not _RELEASE:
     st.write(datepick)
 
     st.subheader("Tags")
-    tags = taginput(data=["A", "B", "C"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
+    tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
     st.write(tags)
 
     st.subheader("Table")

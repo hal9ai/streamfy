@@ -112,7 +112,7 @@ export default {
   data() {
     setTimeout(() => Streamlit.setFrameHeight(), 1000);
     return {
-      result: undefined,
+      result: this.args.default,
     }
   },
   methods: {
