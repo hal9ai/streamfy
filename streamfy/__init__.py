@@ -107,6 +107,12 @@ def taginput(**kwargs):
     component_value = _component_func(component="taginput", **hyphened)
     return component_value
 
+def message(**kwargs):
+    hyphened = hyphen_case_keys(kwargs)
+    hyphened['default'] = True
+    component_value = _component_func(component="message", **hyphened)
+    return component_value
+
 def table(**kwargs):
     hyphened = hyphen_case_keys(kwargs)
     component_value = _component_func(component="table", **hyphened)
@@ -180,6 +186,9 @@ if not _RELEASE:
     st.subheader("Tags")
     tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
     st.write(tags)
+
+    st.subheader("Message")
+    message(text="This is a message", title="Info", type="is-info")
 
     st.subheader("Table")
     columns = [

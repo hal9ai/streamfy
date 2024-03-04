@@ -160,6 +160,14 @@
       >
       </b-taginput>
 
+      <b-message 
+        v-else-if="args.component == 'message'"
+        v-model="result"
+        v-bind="args"
+      >
+        {{ args.text }}
+      </b-message>
+
       <b-table
         v-else-if="args.component == 'table'"
         v-bind="args"
