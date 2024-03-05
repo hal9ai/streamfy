@@ -222,10 +222,10 @@
         
         <template #footer v-if="args.footer">
           <th
-            v-for="(footer, i) in args.footer" :key="i"
+            v-for="(label, key, i) in args.footer" :key="i"
           >
-            <div class="th-wrap" v-bind="footer">
-              {{ footer.text }}
+            <div class="th-wrap">
+              {{ label }}
             </div>
           </th>
         </template>

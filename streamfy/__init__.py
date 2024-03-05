@@ -283,22 +283,6 @@ if not _RELEASE:
     for i in range(0, 10):
         data.append(data[i])
 
-    footer = [
-        {
-            "text": "Totals",
-        },
-        {
-            "text": "",
-        },
-        {
-            "text": "",
-        },
-        {
-            "text": "2000-2010",
-        },
-        {
-            "text": "Gender",
-        },
-    ]
+    footer = { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016/10/15 13:43:27', 'gender': 'Male' }
 
     table(data=data, footer=footer)
