@@ -5,7 +5,7 @@
       :label="args.label"
       :type="args.type"
       :message="args.message"
-      :class="'sy-' + args.component"
+      :class="'sy-' + args.component + ' ' + args['class-name']"
     >
       <b-breadcrumb
         v-if="args.component == 'breadcrumb' && args.items != undefined"
@@ -358,5 +358,28 @@ export default {
 
   .sy-taginput .dropdown-content {
     margin-bottom: 20px;
+  }
+
+
+  .is-orange .pagination-list a,
+  .is-orange .taginput .is-info.taginput-container.is-focusable {
+    border-color: #DB8765 !important;
+  }
+
+  .is-orange a.pagination-link.is-current {
+    background: #DB8765;
+    border-color: #DB8765;
+  }
+
+  .is-orange .tag:not(body).is-info {
+    background: #DB8765 !important;
+  }
+
+  .is-orange span.icon.has-text-info {
+    color: #DB8765 !important;
+  }
+
+  .is-orange .taginput {
+    border-color: #DB8765;
   }
 </style>

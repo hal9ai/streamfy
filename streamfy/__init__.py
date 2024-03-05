@@ -252,7 +252,7 @@ if not _RELEASE:
     st.write(switched)
 
     st.subheader("Tags")
-    tags = taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
+    tags = taginput(class_name="is-orange", data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
     st.write(tags)
 
     st.subheader("Message")
@@ -285,4 +285,4 @@ if not _RELEASE:
 
     footer = { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016/10/15 13:43:27', 'gender': 'Male' }
 
-    table(data=data, footer=footer)
+    table(class_name="is-orange", data=data, footer=footer)
