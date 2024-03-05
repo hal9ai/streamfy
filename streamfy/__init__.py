@@ -35,6 +35,9 @@ defaults = {
     "steps": {
         "has-navigation": False,
     },
+    "taginput": {
+        "autocomplete": True,
+    },
 }
 
 def defaults_apply(component, hyphened):
