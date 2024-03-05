@@ -101,7 +101,7 @@ switched = sy.switch(text="Switch me!")
 st.write(switched)
 
 st.subheader("Tags")
-tags = sy.taginput(data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
+tags = sy.taginput(data=["Apples", "Bananas", "Coconuts"], default=["Bananas"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
 st.write(tags)
 
 st.subheader("Message")

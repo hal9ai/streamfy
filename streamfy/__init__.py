@@ -262,7 +262,7 @@ if not _RELEASE:
     st.write(switched)
 
     st.subheader("Tags")
-    tags = taginput(class_name="is-orange", data=["Apples", "Bannanas", "Coconuts"], default=["Bannanas"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
+    tags = taginput(class_name="is-orange", data=["Apples", "Bananas", "Coconuts"], default=["Bananas"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
     st.write(tags)
 
     st.subheader("Message")

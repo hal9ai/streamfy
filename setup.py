@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="streamfy",
-    version="0.3.3",
+    version="0.3.4",
     author="Javier Luraschi",
     author_email="jluraschi@gmail.com",
     description="Modern frontend web components based on Buefy for Streamlit.",
