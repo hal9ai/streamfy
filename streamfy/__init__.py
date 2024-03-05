@@ -25,7 +25,16 @@ defaults = {
         "sort-icon-size": "is-small",
         "default-sort-direction": "asc",
         "paginated": True,
-    }
+    },
+    "message": {
+        "default": True,
+    },
+    "notification": {
+        "default": True,
+    },
+    "steps": {
+        "has-navigation": False,
+    },
 }
 
 def defaults_apply(component, hyphened):
@@ -45,115 +54,113 @@ def hyphen_case_keys(args):
         snaked[new_key] = value
     return snaked
 
+def process_args(component, args):
+    hyphened = hyphen_case_keys(args)
+    defaults_apply(component, hyphened)
+    return hyphened
+
 def breadcrumb(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("breadcrumb", kwargs)
     component_value = _component_func(component="breadcrumb", **hyphened)
     return component_value
 
 def button(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("button", kwargs)
     component_value = _component_func(component="button", **hyphened)
     return component_value
 
 def carousel(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("carousel", kwargs)
     component_value = _component_func(component="carousel", **hyphened)
     return component_value
 
 def autocomplete(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("autocomplete", kwargs)
     component_value = _component_func(component="autocomplete", **hyphened)
     return component_value
 
 def checkbox(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("checkbox", kwargs)
     component_value = _component_func(component="checkbox", **hyphened)
     return component_value
 
 def clockpicker(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("clockpicker", kwargs)
     component_value = _component_func(component="clockpicker", **hyphened)
     return component_value
 
 def colorpicker(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("colorpicker", kwargs)
     component_value = _component_func(component="colorpicker", **hyphened)
     return component_value
 
 def datepicker(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("datepicker", kwargs)
     component_value = _component_func(component="datepicker", **hyphened)
     return component_value
 
 def input(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("input", kwargs)
     component_value = _component_func(component="input", **hyphened)
     return component_value
 
 def numberinput(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("numberinput", kwargs)
     component_value = _component_func(component="numberinput", **hyphened)
     return component_value
 
 def radio(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("radio", kwargs)
     component_value = _component_func(component="radio", **hyphened)
     return component_value
 
 def rate(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("rate", kwargs)
     component_value = _component_func(component="rate", **hyphened)
     return component_value
 
 def select(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("select", kwargs)
     component_value = _component_func(component="select", **hyphened)
     return component_value
 
 def slider(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("slider", kwargs)
     component_value = _component_func(component="slider", **hyphened)
     return component_value
 
 def switch(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("switch", kwargs)
     component_value = _component_func(component="switch", **hyphened)
     return component_value
 
 def taginput(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("taginput", kwargs)
     component_value = _component_func(component="taginput", **hyphened)
     return component_value
 
 def message(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
-    if not "default" in hyphened:
-        hyphened['default'] = True
+    hyphened = process_args("message", kwargs)
     component_value = _component_func(component="message", **hyphened)
     return component_value
 
 def notification(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
-    if not "default" in hyphened:
-        hyphened['default'] = True
+    hyphened = process_args("notification", kwargs)
     component_value = _component_func(component="notification", **hyphened)
     return component_value
 
 def progress(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
+    hyphened = process_args("progress", kwargs)
     component_value = _component_func(component="progress", **hyphened)
     return component_value
 
 def steps(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
-    if not "has-navigation" in hyphened:
-        hyphened['has-navigation'] = False
+    hyphened = process_args("steps", kwargs)
     component_value = _component_func(component="steps", **hyphened)
     return component_value
 
 def table(**kwargs):
-    hyphened = hyphen_case_keys(kwargs)
-    defaults_apply("table", hyphened)
+    hyphened = process_args("table", kwargs)
     if not "columns" in hyphened and "data" in kwargs and len(kwargs["data"]) > 0:
         hyphened["columns"] = [{"field": key} for key in kwargs["data"][0].keys()]
     component_value = _component_func(component="table", **hyphened)
@@ -252,7 +259,7 @@ if not _RELEASE:
     st.write(switched)
 
     st.subheader("Tags")
-    tags = taginput(class_name="is-orange", data=["A", "B", "C"], default=["B"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
+    tags = taginput(class_name="is-orange", data=["Apples", "Bannanas", "Coconuts"], default=["Bannanas"], allow_new=True, open_on_focus=True, type="is-info", aria_close_label="Remove", placeholder="Choose letter")
     st.write(tags)
 
     st.subheader("Message")
