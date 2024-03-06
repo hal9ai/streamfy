@@ -281,17 +281,12 @@ export default {
       if (this.args.component != 'taginput') return;
       if (!this.args.data) return;
 
-      console.log('x1')
-
       const result = this.result;
-      console.log('x2')
       this.filtered = this.args.data
         .filter(e => {
-          console.log('x3 ' + e)
           return !result.includes(e)
         })
         .filter((datum) => {
-          console.log('x4 ' + datum + ' ' + text)
           return datum
             .toString()
             .toLowerCase()
